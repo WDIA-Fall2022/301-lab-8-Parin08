@@ -84,46 +84,73 @@ def checkWeights(wAssign = 0.4,wMidTerm = 0.35,wFinal = 0.25):
 #calculate the numeric grade as specified in the course outline
 def calculateNumericGrade(AvgAssignments,AvgTests,final,wOfAssign,wOfMidTerms,wFinal):
     calculate = AvgAssignments * wOfAssign + AvgTests * wOfMidTerms + final * wFinal
-    return calculate
+    if calculate >= 90 and calculate <= 100:
+        result = 4.0
+    elif calculate >= 85 and calculate <= 90:
+        result = 3.8
+    elif calculate >= 80 and calculate <= 84:
+        result = 3.6
+    elif calculate >= 77 and calculate <= 79:
+        result = 3.3
+    elif calculate >= 73 and calculate <= 76:
+        result = 3.0
+    elif calculate >= 70 and calculate <= 72:
+        result = 2.7
+    elif calculate >= 67 and calculate <= 69:
+        result = 2.3
+    elif calculate >= 63 and calculate <= 66:
+        result = 2.0
+    elif calculate >= 60 and calculate <= 62:
+        result = 1.7
+    elif calculate >= 57 and calculate <= 59:
+        result = 1.4
+    elif calculate >= 53 and calculate <= 56:
+        result = 1.2
+    elif calculate >= 50 and calculate <= 52:
+        result = 1.0
+    elif calculate < 50:
+        result = 0
+    return result
 
 #convert the numeric grade to a letter according to the conversion table 
 #in the course outline
 def calculateLetterGrade(numericGrade):
     try:
-        val = round(float(numericGrade))
-        if val >= 0 and val <= 100:
-            if val >= 90 and val <= 100:
-                return 'A+'
-            elif val >= 85 and val <= 89:
-                return 'A'
-            elif val >= 80 and val <= 84:
-                return 'A-'
-            elif val >= 77 and val <= 79:
-                return 'B+'
-            elif val >= 73 and val <= 76:
-                return 'B'
-            elif val >= 70 and val <= 72:
-                return 'B-'
-            elif val >= 67 and val <= 69:
-                return 'C+'
-            elif val >= 63 and val <= 66:
-                return 'C'
-            elif val >= 60 and val <= 62:
-                return 'C-'
-            elif val >= 57 and val <= 59:
-                return 'D+'
-            elif val >= 53 and val <= 56:
-                return 'D'
-            elif val >= 50 and val <= 52:
-                return 'D-'
-            else:
-                return 'F'
+        val = float(numericGrade)
+
+        if val >= 4.0:
+            grade = "A+"
+        elif val >= 3.6 and val <= 3.8:
+            grade = "A"
+        elif val >= 3.3 and val <= 3.6:
+            grade = "A-"
+        elif val >= 3.0 and val <= 3.3:
+            grade = "B+"
+        elif val >= 2.7 and val <= 3.0:
+            grade = "B"
+        elif val >= 2.3 and val <= 2.7:
+            grade = "B-"
+        elif val >= 2.0 and val <= 2.3:
+            grade = "C+"
+        elif val >= 1.7 and val <= 2.0:
+            grade = "C"
+        elif val >= 1.4 and val <= 1.7:
+            grade = "C-"
+        elif val >= 1.2 and val <= 1.4:
+            grade = "D+"
+        elif val >= 1.0 and val <= 1.2:
+            grade = "D"
+        elif val >= 0.0 and val <= 1.0:
+            grade = "D-"
+        elif val < 0:
+            grade = "F"
+
         else:
             print('Numeric grade suppose to be between 0 - 100')
-            return 0
+            grade = 0
     except:
         print('Not valid datatype')
-        return 0
+    return grade
 
 
 finalGrade= 0
@@ -219,5 +246,6 @@ numericGrade = calculateNumericGrade(avgAssignmentsGrade,avgTestsGrade,finalGrad
 print("Your numeric grade is " + str(numericGrade))
 
 #Calculate and display the final alphabetical grade (call the appropriate function)
+
 
 print("Your letter grade is " + str(calculateLetterGrade(numericGrade)))
